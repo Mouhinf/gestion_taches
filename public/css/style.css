@@ -1,0 +1,214 @@
+/* ===========================
+   STYLE GÉNÉRAL
+=========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f4f7fc;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar {
+    width: 260px;
+    background: #0b1f4d;
+    color: white;
+    padding: 25px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo h3 {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 12px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.sidebar ul li a:hover {
+    background: #1f4fd8;
+}
+
+.logout {
+    margin-top: 60px;
+}
+
+/* ===========================
+   CONTENU
+=========================== */
+
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* ===========================
+   TOPBAR
+=========================== */
+
+.topbar {
+    background: white;
+    border-radius: 15px;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
+    margin-bottom: 30px;
+}
+
+.topbar h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.topbar small {
+    color: #777;
+}
+
+.profile {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.profile i {
+    font-size: 28px;
+    color: #0b1f4d;
+}
+
+/* ===========================
+   PAGE
+=========================== */
+
+.page-content {
+    padding: 10px;
+}
+
+/* ===========================
+   CARTES
+=========================== */
+
+.card {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* ===========================
+   BOUTONS
+=========================== */
+
+.btn-primary {
+    background: #1f4fd8;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background: #153ca8;
+}
+
+/* ===========================
+   TABLEAUX
+=========================== */
+
+.table {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: #0b1f4d;
+    color: white;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+/* ===========================
+   BADGES
+=========================== */
+
+.badge {
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.bg-success {
+    background: #28a745 !important;
+}
+
+.bg-warning {
+    background: #ffc107 !important;
+    color: black !important;
+}
+
+.bg-secondary {
+    background: #6c757d !important;
+}
+
+/* ===========================
+   FORMULAIRES
+=========================== */
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #1f4fd8;
+}
+
+/* ===========================
+   ALERTES
+=========================== */
+
+.alert {
+    border-radius: 10px;
+}
