@@ -4,6 +4,10 @@
 FROM composer:2 AS build
 WORKDIR /app
 
+# Contourne un problème de certificat SSL réseau dans l'infra de build
+# Render (certificat 'api.glb' présenté au lieu d''api.github.com')
+RUN composer config --global disable-tls true
+
 # Copie des manifests d'abord pour profiter du cache Docker
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --no-autoloader --ignore-platform-reqs
