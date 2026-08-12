@@ -60,6 +60,6 @@ RUN chown -R www-data:www-data storage bootstrap/cache \
 EXPOSE 10000
 
 # Render injecte la variable $PORT ; on écoute dessus.
-# Les migrations sont exécutées au démarrage (idempotentes) car le
-# plan free de Render ne permet ni pre-deploy ni jobs one-off.
-CMD ["sh", "-c", "php artisan migrate --force && php artisan serve --host 0.0.0.0 --port ${PORT:-10000}"]
+# Migrations + seed exécutés au démarrage (idempotents) car le plan
+# free de Render ne permet ni pre-deploy ni jobs one-off.
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host 0.0.0.0 --port ${PORT:-10000}"]
