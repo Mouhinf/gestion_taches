@@ -1,13 +1,13 @@
 services:
   - type: web
     name: gestion-taches
-    env: php
+    runtime: docker
+    repo: https://github.com/Mouhinf/gestion_taches.git
     plan: free
     region: oregon
-    buildCommand: |
-      # Installer les dépendances PHP (sans les dev)
-      composer install --no-dev --optimize-autoloader
-    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    # Exécute les migrations après le premier déploiement réussi
+    initialDeployHook: php artisan migrate --force
     envVars:
       - key: APP_ENV
         value: production
@@ -17,37 +17,12 @@ services:
         generateValue: true
       - key: DB_CONNECTION
         value: pgsql
-      # Connexion PostgreSQL injectée automatiquement depuis le datastore ci-dessous
-      - key: DB_HOST
-        fromService:
-          type: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
           name: gestion-taches-db
-          property: host
-      - key: DB_PORT
-        fromService:
-          type: pgsql
-          name: gestion-taches-db
-          property: port
-      - key: DB_DATABASE
-        fromService:
-          type: pgsql
-          name: gestion-taches-db
-          property: database
-      - key: DB_USERNAME
-        fromService:
-          type: pgsql
-          name: gestion-taches-db
-          property: user
-      - key: DB_PASSWORD
-        fromService:
-          type: pgsql
-          name: gestion-taches-db
-          property: password
-    postDeploy: |
-      php artisan migrate --force
+          property: connectionString
 
 databases:
   - name: gestion-taches-db
-    type: pgsql
     plan: free
     region: oregon
