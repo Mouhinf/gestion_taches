@@ -2,14 +2,11 @@ services:
   - type: web
     name: gestion-taches
     env: php
-    plan: starter
+    plan: free
     region: oregon
     buildCommand: |
-      # Install PHP dependencies (excluding dev packages)
+      # Installer les dépendances PHP (sans les dev)
       composer install --no-dev --optimize-autoloader
-      # Install Node.js dependencies and compile assets with Laravel Mix
-      npm ci
-      npm run prod
     startCommand: php artisan serve --host 0.0.0.0 --port $PORT
     envVars:
       - key: APP_ENV
@@ -19,23 +16,38 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: DB_CONNECTION
-        value: mysql
-      # The following DB variables will be injected automatically by Render when you attach a MySQL service
+        value: pgsql
+      # Connexion PostgreSQL injectée automatiquement depuis le datastore ci-dessous
       - key: DB_HOST
-        fromService: mysql
-        property: host
+        fromService:
+          type: pgsql
+          name: gestion-taches-db
+          property: host
       - key: DB_PORT
-        fromService: mysql
-        property: port
+        fromService:
+          type: pgsql
+          name: gestion-taches-db
+          property: port
       - key: DB_DATABASE
-        fromService: mysql
-        property: database
+        fromService:
+          type: pgsql
+          name: gestion-taches-db
+          property: database
       - key: DB_USERNAME
-        fromService: mysql
-        property: user
+        fromService:
+          type: pgsql
+          name: gestion-taches-db
+          property: user
       - key: DB_PASSWORD
-        fromService: mysql
-        property: password
-    # Run migrations after the build completes
+        fromService:
+          type: pgsql
+          name: gestion-taches-db
+          property: password
     postDeploy: |
       php artisan migrate --force
+
+databases:
+  - name: gestion-taches-db
+    type: pgsql
+    plan: free
+    region: oregon

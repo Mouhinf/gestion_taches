@@ -16,11 +16,8 @@ class CreateTasksTable extends Migration
 
             $table->text('description')->nullable();
 
-            $table->enum('status', [
-                'A faire',
-                'En cours',
-                'Terminee'
-            ])->default('A faire');
+            // Compatible MySQL ET PostgreSQL (Render ne propose pas de MySQL managé)
+            $table->string('status')->default('A faire');
 
             $table->date('deadline')->nullable();
 
